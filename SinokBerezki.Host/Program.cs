@@ -1,24 +1,26 @@
-﻿using DotNetEnv;
+﻿using Discord.WebSocket;
+using DotNetEnv;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SinokBerezki.Application;
-using SinokBerezki.Discordy;
-using SinokBerezki.Infrastructure;
+using SinokBerezki.DiscordBot.Services;
 
-Env.Load(); // загружаем .env из корня решения (или указываем путь)
+Env.TraversePath().Load();
 
-var token = Environment.GetEnvironmentVariable("TOKEN")
-           ?? throw new InvalidOperationException("TOKEN not set in .env");
+var builder = Host.CreateDefaultBuilder(args);
 
-var host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((context, services) =>
+builder.ConfigureServices((context, services) =>
+{
+    // 1. Конфигурируем и регистрируем клиент Discord
+    services.AddSingleton(new DiscordSocketConfig
     {
-        // Регистрируем сервисы каждого модуля
-        services.AddApplicationServices();
-        services.AddInfrastructureServices();
-        services.AddDiscordyServices(token);
+        GatewayIntents = Discord.GatewayIntents.AllUnprivileged | Discord.GatewayIntents.MessageContent
+    });
+    services.AddSingleton<DiscordSocketClient>();
 
-        // Можно добавить логгирование, конфигурацию и т.д.
-    })      
-    .Build();
+    // 2. Регистрируем сервис бота именно как HostedService
+    services.AddHostedService<DiscordBotService>();
+});
+
+var host = builder.Build();
 
 await host.RunAsync();

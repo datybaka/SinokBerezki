@@ -1,17 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />
-    <PackageReference Include="Scrutor" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SinokBerezki.Core\SinokBerezki.Core.csproj" />
-    <ProjectReference Include="..\SinokBerezki.Infrastructure\SinokBerezki.Infrastructure.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SinokBerezki.Application\SinokBerezki.Application.csproj" />
+    <ProjectReference Include="..\SinokBerezki.Core\SinokBerezki.Core.csproj" />
+  </ItemGroup>
+
 </Project>

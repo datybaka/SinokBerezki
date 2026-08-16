@@ -2,7 +2,9 @@
 using DotNetEnv;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SinokBerezki.Application;
 using SinokBerezki.DiscordBot.Services;
+using SinokBerezki.Infrastructure;
 
 Env.TraversePath().Load();
 
@@ -17,7 +19,8 @@ builder.ConfigureServices((context, services) =>
     });
     services.AddSingleton<DiscordSocketClient>();
 
-    // 2. Регистрируем сервис бота именно как HostedService
+    services.AddInfrastructure();
+    services.AddApplication();
     services.AddHostedService<DiscordBotService>();
 });
 

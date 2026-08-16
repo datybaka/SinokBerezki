@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SinokBerezki.Application\SinokBerezki.Application.csproj" />
     <ProjectReference Include="..\SinokBerezki.DiscordBot\SinokBerezki.DiscordBot.csproj" />
+    <ProjectReference Include="..\SinokBerezki.Infrastructure\SinokBerezki.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
